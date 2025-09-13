@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Álbuns{% endblock %}
+
+{% block content %}
+    <h1>Álbuns</h1>
+    <div class="card">
+        {% for album in albuns %}
+            <div class="interactive-list-item">
+                <div class="item-header">
+                    <span>{{ album.nome }} <small>por {{ album.artista.nome }}</small></span> {# MUDOU DE .titulo PARA .nome #}
+                    <button class="toggle-btn" data-target="#musicas-{{ album.pk }}">▼</button>
+                </div>
+
+                <div id="musicas-{{ album.pk }}" class="collapsible-content">
+                    <ul>
+                        {% for musica in album.musica_set.all %}
+                            <li><a href="{% url 'musica-detail' musica.pk %}">{{ musica.nome }}</a></li> {# MUDOU DE .titulo PARA .nome #}
+                        {% empty %}
+                            <li>Nenhuma música encontrada neste álbum.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% empty %}
+            <p>Nenhum álbum cadastrado.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

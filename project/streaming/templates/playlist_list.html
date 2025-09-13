@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Playlists{% endblock %}
+
+{% block content %}
+    <h1>Playlists</h1>
+    <div class="card">
+        {% for playlist in playlists %}
+            <div class="list-item">
+                <a href="{% url 'playlist-detail' playlist.pk %}">{{ playlist.nome }}</a>
+            </div>
+        {% empty %}
+            <p>Nenhuma playlist cadastrada.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

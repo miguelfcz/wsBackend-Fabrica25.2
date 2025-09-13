@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{{ musica.nome }}{% endblock %} {# MUDOU DE .titulo PARA .nome #}
+
+{% block content %}
+    <div class="card">
+        <h1>{{ musica.nome }}</h1> {# MUDOU DE .titulo PARA .nome #}
+        <p>
+            <strong>Álbum:</strong> 
+            <a href="{% url 'album-detail' musica.album.pk %}">{{ musica.album.nome }}</a> {# MUDOU DE .titulo PARA .nome #}
+        </p>
+        <p>
+            <strong>Artista:</strong> 
+            <a href="{% url 'artista-detail' musica.album.artista.pk %}">{{ musica.album.artista.nome }}</a>
+        </p>
+        
+        <div class="detail-actions">
+            <a href="{% url 'musicas' %}" class="btn btn-secondary">Voltar para a Lista</a>
+        </div>
+    </div>
+{% endblock %}

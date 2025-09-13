@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Artistas{% endblock %}
+
+{% block content %}
+    <h1>Artistas</h1>
+    <div class="card">
+        {% for artista in artistas %}
+            <div class="interactive-list-item">
+                <div class="item-header">
+                    <span>{{ artista.nome }}</span>
+                    <button class="toggle-btn" data-target="#albums-{{ artista.pk }}">▼</button>
+                </div>
+                
+                <div id="albums-{{ artista.pk }}" class="collapsible-content">
+                    <ul>
+                        {% for album in artista.album_set.all %}
+                            <li><a href="{% url 'album-detail' album.pk %}">{{ album.nome }}</a></li> {# MUDOU DE .titulo PARA .nome #}
+                        {% empty %}
+                            <li>Nenhum álbum encontrado.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% empty %}
+            <p>Nenhum artista cadastrado.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Músicas{% endblock %}
+
+{% block content %}
+    <h1>Músicas</h1>
+    <div class="card">
+        {% for musica in musicas %}
+            <div class="list-item">
+                <div>
+                    <a href="{% url 'musica-detail' musica.pk %}">{{ musica.nome }}</a>
+                    <br>
+                    <small style="color: #6c757d;">Artista: {{ musica.album.artista.nome }}</small>
+                </div>
+            </div>
+        {% empty %}
+            <p>Nenhuma música cadastrada.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

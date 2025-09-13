@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ artista.nome }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1>{{ artista.nome }}</h1>
+        <h2>Álbuns</h2>
+        <ul>
+            {% for album in artista.album_set.all %}
+                <li><a href="{% url 'album-detail' album.pk %}">{{ album.titulo }}</a></li>
+            {% empty %}
+                <li>Nenhum álbum cadastrado para este artista.</li>
+            {% endfor %}
+        </ul>
+        <div class="detail-actions">
+            <a href="{% url 'artistas' %}" class="btn btn-secondary">Voltar para a Lista</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ playlist.nome }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1>{{ playlist.nome }}</h1>
+
+        <h2>Músicas na Playlist</h2>
+        <ul>
+            {% for musica in playlist.musicas.all %}
+                <li>
+                    <a href="{% url 'musica-detail' musica.pk %}">{{ musica.nome }}</a> 
+                    <small style="color: #6c757d;">- {{ musica.album.artista.nome }}</small>
+                </li>
+            {% empty %}
+                <li>Esta playlist ainda não tem músicas.</li>
+            {% endfor %}
+        </ul>
+        
+        <div class="detail-actions">
+            <a href="{% url 'playlists' %}" class="btn btn-secondary">Voltar para a Lista</a>
+        </div>
+    </div>
+{% endblock %}

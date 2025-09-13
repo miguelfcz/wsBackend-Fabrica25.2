@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Meu Projeto Musical{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'artistas' %}">Artistas</a></li>
+            <li><a href="{% url 'albuns' %}">Álbuns</a></li>
+            <li><a href="{% url 'musicas' %}">Músicas</a></li>
+            <li><a href="{% url 'playlists' %}">Playlists</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const content = document.querySelector(targetId);
+                    
+                    if (content) {
+                        content.classList.toggle('show');
+                        this.classList.toggle('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
